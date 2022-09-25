@@ -1,0 +1,86 @@
+
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="box">
+                                <header>
+                                    <div class="icons"><i class="icon-th-large"></i></div>
+                                    <h5>FORM</h5>
+                                    <div class="toolbar">
+                                        <ul class="nav">
+                                            <li>
+                                                <div class="btn-group">
+                                                    <a class="accordion-toggle btn btn-xs minimize-box" data-toggle="collapse"
+                                                        href="#collapseOne">
+                                                        <i class="icon-chevron-up"></i>
+                                                    </a>
+                                                    <button class="btn btn-xs btn-danger close-box">
+                                                        <i class="icon-remove"></i>
+                                                    </button>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                </header>
+                                <div id="collapseOne" class="accordion-body collapse in body">
+                                    <form action="/san-pham/chi-tiet/{{product._id}}" class="form-horizontal" id="block-validate" method="post"
+                                    enctype="multipart/form-data">
+
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4" for="name">Name</label>
+                                            <div class="col-lg-4">
+                                                <input value="{{product.name}}" type="text" name="name" class="form-control" placeholder="Name" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4" for="price">Price</label>
+                                            <div class="col-lg-4">
+                                                <input value="{{product.price}}" type="text" name="price" class="form-control" placeholder="Name"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4" for="quantity">Quantity</label>
+                                            <div class="col-lg-4">
+                                                <input value="{{product.quantity}}" type="text" name="quantity" class="form-control" placeholder="Quantity" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label col-lg-4" for="category">Category</label>
+                                               <select class="col-lg-4" name="category">
+                                                {{#each categories}}
+                                                {{#if this.isSelected}}
+                                                <option selected value="{{this._id}}">{{this.name}}</option>
+                                                {{else}}
+                                                <option value="{{this._id}}">{{this.name}}</option>
+                                                {{/if}}
+                                                {{/each}}
+                                               </select>
+                                            
+
+                                        </div>
+                                        <div class="form-group">
+                                                <input type="file" id="image-file" name="image" class="form-control " onchange="onChangFile()" />
+                                            </div>
+           
+                                            <div class="form-group">
+                                           <img id="image-view" class="product-img" src="{{product.image}}" alt="Hình ảnh sản phẩm" />
+
+                                          </div>
+                                         <button type="submit" class="btn btn-primary me-2">Submit</button>
+                                         <button class="btn btn-light">Cancel</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+ <script>
+                        const onChangFile = () => {
+                           const file  = document.getElementById('image-file').files[0];
+                           const reader = new FileReader();
+                           reader.onload = e =>{
+                                document.getElementById('image-view').src = e.target.result;
+                                document.getElementById('image-view').style.display = 'block';
+                           }
+                           reader.readAsDataURL(file);
+                        } 
+                    </script>
